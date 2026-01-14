@@ -130,7 +130,7 @@ def data_preprocessing(df):
         X_train[i] = le.fit_transform(X_train[i])
         X_test[i] = le.transform(X_test[i])
 
-    # Using Normaliazatio Technique
+    # Using Normaliazation Technique
     sc = MinMaxScaler()
     X_train = sc.fit_transform(X_train)  # Seen Data
     X_test = sc.transform(X_test)        # Unseen Data
@@ -205,7 +205,7 @@ rf = RandomForestRegressor(random_state=42)
 
 param_grid = {
     'n_estimators': [100],
-    'max_depth':[None],
+    'max_depth':[None]
 
 }
 
