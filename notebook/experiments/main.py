@@ -25,7 +25,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor,GradientBoostingRegressor,AdaBoostRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
-
+from sklearn.model_selection import GridSearchCV
 
 filepath = "https://raw.githubusercontent.com/rushikeshpatil-123/DeliveryLogistics_Model/refs/heads/main/data/raw/Delivery_Logistics.csv" \
 
@@ -58,7 +58,7 @@ def data_exploration(df):
 
         outlier_count = ((df[col] < LW) | (df[col] > UW)).sum()
 
-    stats = OrderedDict({
+        stats = OrderedDict({
         "Feature": col,
         "Mean" : df[col].mean(),
         "Medain":df[col].median(),
@@ -137,7 +137,6 @@ def data_preprocessing(df):
     return X_train , X_test , y_train , y_test
 
 # Step 4: Model building
-# Step 4: Model building
 def model_building(X_train, X_test, y_train, y_test):
 
     models = {
@@ -177,7 +176,7 @@ def model_building(X_train, X_test, y_train, y_test):
     Regression_models_report = pd.DataFrame(Regression_models)
     return Regression_models_report
 
-    
+
 
 # Function Calling 
 
@@ -192,6 +191,37 @@ X_train, X_test, y_train, y_test = data_preprocessing(df)
 
 # step4: Model Building
 model_report = model_building(X_train, X_test, y_train, y_test)
+
+# Use RandomForest with GridSearch CV 
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import GridSearchCV
+
+# Build Model with RandomForest 
+
+rf = RandomForestRegressor(random_state=42)
+
+# Hyperparameter grid
+
+param_grid = {
+    'n_estimators': [100],
+    'max_depth':[None],
+
+}
+
+# GridSearch CV
+grid = GridSearchCV(
+    estimator = rf,
+    param_grid = param_grid,
+    cv = 5,
+    n_jobs= -1,
+    verbose= 1
+)
+# Fit On training Data 
+grid.fit(X_train,y_train)
+
+print("Best parameters:", grid.best_params_)
+print("Best score:", grid.best_score_)
 
 #print(data)
 #print(numerical_stats_report)
