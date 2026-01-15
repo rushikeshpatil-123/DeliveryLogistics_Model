@@ -107,6 +107,8 @@ def data_exploration(df):
 
     return numerical_stats_report, categorical_stats_report, dataset_info
 
+
+
 def data_preprocessing(df):
 
     X = df.drop(columns = ['package_weight_kg'],axis = 1)
@@ -152,7 +154,7 @@ def model_building(X_train, X_test, y_train, y_test):
 
     for model_name, model in models.items():
 
-        print(f"Training model: {model_name}")  # 🔍 CMD debug
+        print(f"Training model: {model_name}")  
 
         # Train
         model.fit(X_train, y_train)
@@ -175,6 +177,7 @@ def model_building(X_train, X_test, y_train, y_test):
     
     Regression_models_report = pd.DataFrame(Regression_models)
     return Regression_models_report
+
 
 
 
@@ -220,11 +223,41 @@ grid = GridSearchCV(
 # Fit On training Data 
 grid.fit(X_train,y_train)
 
-print("Best parameters:", grid.best_params_)
-print("Best score:", grid.best_score_)
+#print("Best parameters:", grid.best_params_)
+#print("Best score:", grid.best_score_)
 
-print(df)
-print(numerical_stats_report)
-print(categorical_stats_report)
-print(dataset_info)
-print(model_report)
+# Covert into Bins
+df['weight_category'] = pd.cut(
+    df['package_weight_kg'],
+    bins = [0,10,25,df['package_weight_kg'].max()],
+    labels = [
+        'Light (0 - 10 kg)',
+        'Medium (10 - 25 kg)',
+        'Heavy (25+ kg)'
+
+    ],
+    include_lowest = True
+)
+
+# Crosstab
+def crosstab(df):
+    crosstab1 = pd.crosstab(df['region'],df['weight_category'],margins=True)
+    crosstab2 = pd.crosstab(df['vehicle_type'],df['weight_category'],margins=True)
+    crosstab3 = pd.crosstab(df['package_type'],df['weight_category'],margins=True)
+    crosstab4 = pd.crosstab(df['delivery_mode'],df['weight_category'],margins=True)
+    crosstab5 = pd.crosstab(df['weather_condition'],df['weight_category'],margins=True)
+    return crosstab1,crosstab2,crosstab3,crosstab4,crosstab5
+
+crosstab1,crosstab2,crosstab3,crosstab4,crosstab5 = crosstab(df)
+
+#print(df)
+#print(numerical_stats_report)
+#print(categorical_stats_report)
+#print(dataset_info)
+#print(model_report)
+print(crosstab1)
+print(crosstab2)
+print(crosstab3)
+print(crosstab4)
+print(crosstab5)
+#python notebook/experiments/main.py 
