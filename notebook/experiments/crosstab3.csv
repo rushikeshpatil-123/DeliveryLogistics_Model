@@ -1,0 +1,11 @@
+package_type,Light (0 - 10 kg),Medium (10 - 25 kg),Heavy (25+ kg),All
+automobile parts,565,853,1377,2795
+clothing,515,845,1407,2767
+cosmetics,554,807,1383,2744
+documents,543,907,1355,2805
+electronics,540,834,1418,2792
+fragile items,586,802,1460,2848
+furniture,544,800,1402,2746
+groceries,525,835,1333,2693
+pharmacy,514,860,1436,2810
+All,4886,7543,12571,25000
