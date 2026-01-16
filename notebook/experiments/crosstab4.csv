@@ -1,0 +1,6 @@
+delivery_mode,Light (0 - 10 kg),Medium (10 - 25 kg),Heavy (25+ kg),All
+express,1219,1819,3195,6233
+same day,1221,1913,3145,6279
+standard,1190,1880,3116,6186
+two day,1256,1931,3115,6302
+All,4886,7543,12571,25000
