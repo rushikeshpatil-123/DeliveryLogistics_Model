@@ -5,11 +5,18 @@
 
 
 
+# Objective 
+
+this project formulates the problem as a supervised machine learning regression task, where the goal is to predict the package weight (in kilograms) using delivery and logistics-related features.
+
+---
+
 # Problem Defination
 
-In real-world logistics systems, package weight plays a critical role in determining delivery cost, vehicle allocation, delivery mode, and overall operational efficiency. However, package weight information may sometimes be missing, delayed, or inaccurate.
+In real-world logistics systems, package weight plays a critical role in determining delivery cost, vehicle allocation, delivery mode, and 
 
-To address this challenge, this project formulates the problem as a supervised machine learning regression task, where the goal is to predict the package weight (in kilograms) using delivery and logistics-related features.
+overall operational efficiency. However, package weight information may sometimes be missing, delayed, or inaccurate.
+
 
 ---
 
